@@ -5,11 +5,32 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider = "prisma-client-js"
-  output   = "../generated/prisma"
+provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+provider = "postgresql"
+url = env("DATABASE_URL")
+}
+
+model User {
+id Int @id @default(autoincrement())
+name String
+email String @unique
+tasks Task[]
+}
+model Category {
+id Int @id @default(autoincrement())
+name String
+tasks Task[]
+}
+model Task {
+id Int @id @default(autoincrement())
+title String
+description String?
+completed Boolean @default(false)
+userId Int
+categoryId Int
+user User @relation(fields: [userId], references: [id])
+category Category @relation(fields: [categoryId], references: [id])
 }
