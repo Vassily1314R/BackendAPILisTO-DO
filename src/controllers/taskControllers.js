@@ -4,12 +4,12 @@ export const createTask = async (req, res) => {
   const { title, description, userId, taskStatus } = req.body;
   try {
     const task = await prisma.task.create({
-      data: { title, descripcion, userId, taskStatus },
+      data: { title, description, userId, taskStatus },
     });
     res.status(400).json({ error: message });
     console.error("Error al crear la tarea", error);
   } catch (error) {
-    res.status(400).json({ error: error.message });
+    res.status(400).json({ error: error.message }); 
     // el error 400 indica que la solicitud no se pudo procesar debido a un error del cliente, como datos inválidos o faltantes.
     console.error("Error al crear la tarea:", error);
   }
