@@ -9,7 +9,7 @@ import {
 const router = express.Router(); // router es un mini servidor para agrupar rutas
 
 // Endpoints CRUD
-router.post("/tasks", createTask); // Crear tarea  http://localhost:3000/api/tasksl
+router.post("/tasks", createTask); // Crear tarea
 router.get("/tasks", getTasks); // Leer tareas
 router.put("/tasks/:id", updateTask); // Actualizar tarea
 router.delete("/tasks/:id", deleteTask); // Eliminar tarea
