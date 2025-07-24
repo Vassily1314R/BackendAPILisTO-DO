@@ -27,12 +27,13 @@ model TaskStatus {
 }
 
 model Task {
-    id          Int     @id @default(autoincrement())
+    id          Int       @id @default(autoincrement())
     title       String
     description String?
-    completed   Boolean @default(false)
+    completed   Boolean   @default(false)
+    createAt    DateTime?
     userId      Int
-    user        User    @relation(fields: [userId], references: [id])
+    user        User      @relation(fields: [userId], references: [id])
 
     taskStatus   TaskStatus? @relation(fields: [taskStatusId], references: [id])
     taskStatusId Int?
