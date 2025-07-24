@@ -1,20 +1,20 @@
 import prisma from "../prismaClient.js";
 
 export const createTask = async (req, res) => {
-  const { title, description, userId, taskStatusId } = req.body;
+  const { title, description, userId, taskStatusId, createAt} = req.body;
   if (!Number.isInteger(taskStatusId)) {
     return res.status(400).json({ error: "taskStatus must be an integer" });
   }
 
   try {
     const task = await prisma.task.create({
-      data: { title, description, userId, taskStatusId },
+      data: { title, description, userId, taskStatusId, createAt},
     });
     res.json(task);
   } catch (error) {
-    res.status(400).json({ error: error.message });
-    // el error 400 indica que la solicitud no se pudo procesar debido a un error del cliente, como datos inválidos o faltantes.
+    res.status(400).json({ error: error.message }); 
     console.error("Error al crear la tarea:", error);
+    // el error 400 indica que la solicitud no se pudo procesar debido a un error del cliente, como datos inválidos o faltantes.
   }
 };
 
